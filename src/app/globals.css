@@ -137,7 +137,10 @@ textarea.field {
 }
 .wm-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(15, 118, 110, 0.22);
+  box-shadow: 0 10px 24px rgba(47, 58, 122, 0.22);
+}
+.wm-btn.wm-btn-navy:hover {
+  box-shadow: 0 10px 24px rgba(47, 58, 122, 0.22);
 }
 .wm-btn:active { transform: translateY(1px); box-shadow: none; }
 
@@ -146,8 +149,8 @@ textarea.field {
 }
 .wm-card:hover {
   transform: translateY(-3px);
-  border-color: #0f766e;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  border-color: #2f3a7a;
+  box-shadow: 0 10px 22px rgba(47, 58, 122, 0.12);
 }
 
 @media (prefers-reduced-motion: reduce) {

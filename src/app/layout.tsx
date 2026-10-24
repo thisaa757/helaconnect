@@ -10,7 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "WedaMate LK",
+  title: "Hela-Connect",
   description: "Connects customers in Sri Lanka with skilled tradespeople.",
 };
 

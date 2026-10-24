@@ -137,6 +137,8 @@ const workers: NewWorker[] = [
 function resetTables() {
   const db = getDb();
   db.exec(`
+    DELETE FROM job_comments;
+    DELETE FROM job_reactions;
     DELETE FROM requests;
     DELETE FROM reviews;
     DELETE FROM worker_photos;

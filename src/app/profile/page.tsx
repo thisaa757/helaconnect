@@ -1,10 +1,13 @@
-// Profile. Empty for now, same role as LinkedIn's Me / profile page.
+// The signed-in person's profile. Guests are sent to /login.
+
+import type { Metadata } from "next";
+import { ProfileScreen } from "@/components/profile/ProfileScreen";
+
+export const metadata: Metadata = {
+  title: "Profile · Hela-Connect",
+  description: "View and edit your Hela-Connect profile.",
+};
 
 export default function ProfilePage() {
-  return (
-    <section className="card">
-      <h1 className="text-3xl font-bold">Profile</h1>
-      <p className="mt-2 text-stone-600">This page is empty.</p>
-    </section>
-  );
+  return <ProfileScreen mode="own" />;
 }

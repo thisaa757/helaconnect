@@ -5,12 +5,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LanguageToggle } from "@/components/LanguageToggle";
 
 const APP_LINKS = [
   { href: "/home", label: "Home" },
   { href: "/suggested", label: "Suggested" },
-  { href: "/work", label: "Work" },
+  { href: "/work", label: "Post" },
   { href: "/notifications", label: "Notifications" },
   { href: "/profile", label: "Profile" },
 ];
@@ -22,10 +21,10 @@ export function Navbar() {
     <header className="bg-secondary text-primary">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-4 py-3">
         <div className="flex items-center justify-between gap-3">
-          <Link href="/home" className="text-xl font-bold text-primary no-underline">
-            WedaMate LK
+          <Link href="/home" className="flex items-center gap-2 text-xl font-bold text-primary no-underline">
+            <img src="/hela-connect-logo.jpg" alt="" className="h-11 w-11 rounded-xl bg-white object-cover" />
+            Hela-Connect
           </Link>
-          <LanguageToggle />
         </div>
         <nav className="flex flex-wrap items-center gap-2">
           {APP_LINKS.map((link) => {

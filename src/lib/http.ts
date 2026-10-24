@@ -9,8 +9,9 @@ export function ok(body: unknown, status = 200) {
   return NextResponse.json(body, { status, headers: noStore });
 }
 
-export function fail(message: string, status = 400) {
-  return NextResponse.json({ error: message }, { status, headers: noStore });
+export function fail(message: string, status = 400, fields?: unknown) {
+  const body = fields ? { error: message, fields } : { error: message };
+  return NextResponse.json(body, { status, headers: noStore });
 }
 
 export async function readBody(request: Request): Promise<unknown | undefined> {

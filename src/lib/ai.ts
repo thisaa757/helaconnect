@@ -109,6 +109,11 @@ function parseModelJson<T>(text: string): T {
 }
 
 function mockText(prompt: string): string {
+  if (prompt.includes("TASK: improveDescription")) {
+    const tidy = section(prompt, "PROFILE_DESCRIPTION:").replace(/\s+/g, " ").trim();
+    const description = Array.from(tidy).slice(0, 400).join("");
+    return JSON.stringify({ description });
+  }
   if (prompt.includes("TASK: generateWorkerProfile")) return JSON.stringify(mockProfile(section(prompt, "DESCRIPTION:")));
   if (prompt.includes("TASK: structureJob")) return JSON.stringify(mockJob(section(prompt, "JOB_TEXT:")));
   if (prompt.includes("TASK: rankWorkers")) return JSON.stringify(mockRank(prompt));

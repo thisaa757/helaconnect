@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="House cleaning">
+  <rect width="640" height="360" fill="#F5EDE3"/>
+  <rect x="150" y="120" width="250" height="170" rx="8" fill="#FFFFFF" stroke="#2F3A7A" stroke-width="8"/>
+  <polygon points="130,130 275,48 420,130" fill="#2F3A7A"/>
+  <rect x="245" y="200" width="60" height="90" fill="#F5EDE3" stroke="#2F3A7A" stroke-width="6"/>
+  <rect x="180" y="160" width="48" height="40" fill="#D9E2F5" stroke="#2F3A7A" stroke-width="6"/>
+  <rect x="322" y="160" width="48" height="40" fill="#D9E2F5" stroke="#2F3A7A" stroke-width="6"/>
+  <rect x="430" y="168" width="14" height="122" rx="6" fill="#8C5A3C"/>
+  <path d="M444 168c48 8 70 36 62 78-6 32-34 40-52 28" fill="none" stroke="#2F3A7A" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="500" cy="250" r="8" fill="#2F3A7A"/>
+</svg>
