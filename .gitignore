@@ -31,7 +31,23 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
+.env
+.env.local
 .env*
+!.env.example
+
+# sqlite database created on first run
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# portfolio photos saved by the app
+public/uploads/*
+!public/uploads/.gitkeep
+
+node_modules
+.next
 
 # vercel
 .vercel

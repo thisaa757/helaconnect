@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Workers, jobs, and photos change on every click, so pages stay request-time.
+  cacheComponents: false,
+  // Native SQLite module. Do not bundle it into the server code.
+  serverExternalPackages: ["better-sqlite3"],
   turbopack: {
     rules: {
       "*.css": {
