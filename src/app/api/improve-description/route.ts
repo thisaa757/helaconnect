@@ -1,6 +1,7 @@
 // POST /api/improve-description
 // Rewrites the caller's own draft. The Gemini key stays in GEMINI_API_KEY on the server.
 // The reply is a suggestion. The page does not save it unless the person accepts it.
+//test
 
 import { callAIJson, usingMockAi } from "@/lib/ai";
 import { fail, ok, readBody } from "@/lib/http";
