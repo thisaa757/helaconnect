@@ -10,6 +10,15 @@ Tilers, painters, masons, electricians, plumbers, and carpenters often have no p
 
 A worker speaks or types in Sinhala, Tamil, or English. AI drafts a profile they can edit and save, with optional photos. A customer describes a job in plain language. AI turns that into fields (trade, area, size, timeframe). The app then filters workers in SQLite and asks AI to rank the top matches, each with a one-sentence reason.
 
+## Team
+
+| Name | GitHub |
+|---|---|
+| **Nisila Dinod** | [@itznisila](https://github.com/itznisila) |
+| **Hesandu Ruwanpathirana** | [@Hesandu-Ruwanpathirana](https://github.com/Hesandu-Ruwanpathirana) |
+| **Dulin Wataraka** | [@DulinWataraka](https://github.com/DulinWataraka) |
+| **Thisath Thewnaka** | [@thisaa757](https://github.com/thisaa757) |
+
 ## Features
 
 - Worker profile from voice or text, then an editable draft
