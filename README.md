@@ -1,4 +1,4 @@
-# TradeLink LK
+# Hela Connect
 
 A small web app that helps informal tradespeople in Sri Lanka become hireable, and helps customers describe a job and see ranked matches.
 
