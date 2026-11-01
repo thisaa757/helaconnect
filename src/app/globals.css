@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5ede3;
+  --background: #f3f2ef;
   --foreground: #1c1917;
   --primary: #f5ede3;
   --secondary: #2f3a7a;
@@ -97,8 +97,9 @@ textarea.field {
 .card {
   background: white;
   border: 1px solid #e7e5e4;
-  border-radius: 1.25rem;
+  border-radius: 0.85rem;
   padding: 1rem;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
 }
 
 /* Opening page motion. Scoped so the rest of the app stays still. */

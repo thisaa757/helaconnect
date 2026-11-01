@@ -1,24 +1,12 @@
-"use client";
+// Home is the job feed for a worker and nearby people for everyone else.
 
-// Home always stays on this page. The job feed is shown for a worker signup.
-
-import { useSyncExternalStore } from "react";
-import { useLang } from "@/components/LanguageToggle";
-import { SuggestedFeed } from "@/components/suggested/SuggestedFeed";
-import { t } from "@/lib/i18n";
-import { getProfileDraft, getServerProfileDraft, subscribeProfileDraft } from "@/lib/profile/draft";
+import { Suspense } from "react";
+import { HomeScreen } from "@/components/home/HomeScreen";
 
 export default function HomePage() {
-  const { lang } = useLang();
-  const draft = useSyncExternalStore(subscribeProfileDraft, getProfileDraft, getServerProfileDraft);
-  const worker = draft.signedUp && draft.role === "worker";
-
-  if (worker) return <SuggestedFeed page="home" />;
-
   return (
-    <section className="card mx-auto max-w-2xl space-y-2">
-      <h1 className="text-3xl font-bold">{t("home", lang)}</h1>
-      <p className="text-stone-700">{t("homeWorkerOnly", lang)}</p>
-    </section>
+    <Suspense fallback={<div className="card h-40 animate-pulse bg-stone-100" aria-hidden="true" />}>
+      <HomeScreen />
+    </Suspense>
   );
 }

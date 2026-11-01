@@ -145,18 +145,34 @@ export function ProfileScreen({ mode, userId }: { mode: "own" | "public"; userId
     (a, b) => CATEGORIES.findIndex((item) => item.id === a) - CATEGORIES.findIndex((item) => item.id === b),
   );
 
+  const headline = worker
+    ? [saved.businessType ? categoryLabel(saved.businessType, lang) : copy.worker, districtLabel].join(" · ")
+    : districtLabel;
+
   return (
-    <div className="mx-auto w-full max-w-lg space-y-4">
+    <div className="mx-auto w-full max-w-2xl space-y-4">
       <ProfileHeader
         name={displayName}
         role={role}
-        districtLabel={districtLabel}
+        headline={headline}
         stats={{ avg: null, count: 0 }}
         ratingsError={false}
         email={own ? draft.email || null : null}
         phone={own && draft.phone ? formatPhone(draft.phone) : null}
         phoneLabel={t("phone", lang)}
         copy={copy}
+        action={
+          showContact ? (
+            <div className="grid gap-2">
+              <a className={primaryButtonClass} href={wa!} target="_blank" rel="noopener noreferrer">
+                {copy.chatWhatsApp}
+              </a>
+              <a className={secondaryButtonClass} href={tel!}>
+                {copy.call}
+              </a>
+            </div>
+          ) : null
+        }
       />
 
       <DetailsCard
@@ -166,18 +182,6 @@ export function ProfileScreen({ mode, userId }: { mode: "own" | "public"; userId
         canEdit={own}
         editLabel={copy.edit}
         onEdit={startEdit}
-        contact={
-          showContact ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              <a className={primaryButtonClass} href={wa} target="_blank" rel="noopener noreferrer">
-                {copy.chatWhatsApp}
-              </a>
-              <a className={secondaryButtonClass} href={tel}>
-                {copy.call}
-              </a>
-            </div>
-          ) : null
-        }
       >
         <EditForm
           role={role}
@@ -223,7 +227,7 @@ export function ProfileScreen({ mode, userId }: { mode: "own" | "public"; userId
       {toast ? (
         <div
           role="status"
-          className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-md rounded-2xl bg-[#2F3A7A] px-4 py-3 text-center font-semibold text-white shadow-lg"
+          className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-md rounded-2xl bg-[#2F3A7A] px-4 py-3 text-center font-semibold text-white shadow-lg lg:bottom-6"
         >
           {toast}
         </div>

@@ -116,10 +116,10 @@ export default function PostPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-lg space-y-4">
-      <header className="space-y-2">
-        <h1 className="text-3xl font-bold">{t("postTitle", lang)}</h1>
-        <p className="text-stone-700">{t("postIntro", lang)}</p>
+    <div className="mx-auto w-full max-w-2xl space-y-4">
+      <header className="px-1">
+        <h1 className="text-2xl font-bold">{t("postTitle", lang)}</h1>
+        <p className="text-sm text-stone-600">{t("postIntro", lang)}</p>
       </header>
 
       {!draft.signedUp ? (
