@@ -104,6 +104,7 @@ export function SuggestedFeed({ page, initialQuery = "" }: { page: "home" | "sug
   const [jobs, setJobs] = useState<SuggestedPost[]>([]);
   const [access, setAccess] = useState<"authenticated" | "demo" | null>(null);
   const [blocked, setBlocked] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [reloadKey, setReloadKey] = useState(0);
@@ -204,11 +205,14 @@ export function SuggestedFeed({ page, initialQuery = "" }: { page: "home" | "sug
   const showFeed = !blocked && access !== null;
   const title = page === "home" ? t("home", lang) : t("feedTitle", lang);
 
+  const selectClass =
+    "h-10 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm font-semibold text-stone-900 outline-none focus-visible:border-[#2F3A7A] focus-visible:ring-2 focus-visible:ring-[#2F3A7A]";
+
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-3">
+    <div className="w-full space-y-3">
       <h1 className="sr-only">{title}</h1>
+      <p className="sr-only">{onHome ? t("feedIntro", lang) : t("suggestedIntro", lang)}</p>
       <Composer name={feedName} prompt={t("composerWorker", lang)} />
-      <p className="px-1 text-sm text-stone-600">{onHome ? t("feedIntro", lang) : t("suggestedIntro", lang)}</p>
 
       {!onHome && token && access === "authenticated" && !blocked ? (
         <p className="rounded-2xl border border-[#2F3A7A]/20 bg-white px-4 py-3 text-sm text-stone-700">{t("signedInWorker", lang)}</p>
@@ -293,76 +297,75 @@ export function SuggestedFeed({ page, initialQuery = "" }: { page: "home" | "sug
 
       {!needsInterest && showFeed ? (
         <>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <label className="space-y-1 text-sm font-semibold">
-              {t("area", lang)}
-              <select
-                className="field"
-                value={area}
-                onChange={(event) => {
-                  setLoading(true);
-                  setArea(event.target.value);
-                }}
-              >
-                <option value="">{t("all", lang)}</option>
-                {areas.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="space-y-1 text-sm font-semibold">
-              {t("feedJobRole", lang)}
-              <select
-                className="field"
-                value={trade}
-                onChange={(event) => {
-                  setLoading(true);
-                  setTrade(event.target.value);
-                }}
-              >
-                <option value="">{t("all", lang)}</option>
-                {trades.map((item) => (
-                  <option key={item} value={item}>
-                    {tradeLabel(item, lang)}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="space-y-1 text-sm font-semibold sm:col-span-2">
-              {t("feedSearch", lang)}
-              <input
-                className="field"
-                type="search"
-                value={query}
-                onChange={(event) => {
-                  setLoading(true);
-                  setQuery(event.target.value);
-                }}
-              />
-            </label>
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p aria-live="polite" className="text-sm font-semibold text-stone-700">
-              {loading ? t("loading", lang) : `${jobs.length} ${jobs.length === 1 ? t("feedJob", lang) : t("feedJobs", lang)}`}
-            </p>
+          <div className="flex items-center justify-between gap-3 px-1">
             <button
               type="button"
-              className="min-h-12 rounded-xl border-2 border-[#2F3A7A] bg-white px-4 font-bold text-[#2F3A7A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F3A7A] disabled:opacity-55"
-              onClick={() => {
-                setLoading(true);
-                setArea("");
-                setTrade("");
-                setQuery("");
-              }}
-              disabled={!filtered}
+              aria-expanded={showFilters || filtered}
+              onClick={() => setShowFilters((value) => !value)}
+              className="inline-flex h-9 items-center rounded-full border border-stone-300 bg-white px-4 text-sm font-bold text-stone-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F3A7A]"
             >
-              {t("clearFilters", lang)}
+              {t("filters", lang)}
             </button>
+            <p aria-live="polite" className="text-sm text-stone-500">
+              {loading ? t("loading", lang) : `${jobs.length} ${jobs.length === 1 ? t("feedJob", lang) : t("feedJobs", lang)}`}
+            </p>
           </div>
+          {showFilters || filtered ? (
+            <div className="grid grid-cols-2 gap-2">
+              <label className="space-y-1 text-xs font-semibold text-stone-600">
+                {t("area", lang)}
+                <select
+                  className={selectClass}
+                  value={area}
+                  onChange={(event) => {
+                    setLoading(true);
+                    setArea(event.target.value);
+                  }}
+                >
+                  <option value="">{t("all", lang)}</option>
+                  {areas.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="space-y-1 text-xs font-semibold text-stone-600">
+                {t("feedJobRole", lang)}
+                <select
+                  className={selectClass}
+                  value={trade}
+                  onChange={(event) => {
+                    setLoading(true);
+                    setTrade(event.target.value);
+                  }}
+                >
+                  <option value="">{t("all", lang)}</option>
+                  {trades.map((item) => (
+                    <option key={item} value={item}>
+                      {tradeLabel(item, lang)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              {filtered ? (
+                <button
+                  type="button"
+                  className="col-span-2 h-9 justify-self-start text-sm font-bold text-[#2F3A7A] underline-offset-2 hover:underline"
+                  onClick={() => {
+                    setLoading(true);
+                    setArea("");
+                    setTrade("");
+                    setQuery("");
+                  }}
+                >
+                  {t("clearFilters", lang)}
+                </button>
+              ) : null}
+            </div>
+          ) : null}
 
-          {loading ? <FeedSkeleton /> : null}
+          {loading && jobs.length === 0 ? <FeedSkeleton /> : null}
           {!loading && !error && jobs.length === 0 ? (
             <p className="card text-stone-700">{filtered ? t("noFilterResults", lang) : t("noJobs", lang)}</p>
           ) : null}

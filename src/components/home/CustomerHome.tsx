@@ -21,10 +21,10 @@ export function CustomerHome({ query }: { query: string }) {
   });
 
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-3">
+    <div className="w-full space-y-3">
       <h1 className="sr-only">{t("home", lang)}</h1>
+      <p className="sr-only">{t("customerHomeBody", lang)}</p>
       <Composer name={name} prompt={t("composerCustomer", lang)} />
-      <p className="px-1 text-sm text-stone-600">{t("customerHomeBody", lang)}</p>
       {people.length === 0 ? <p className="card text-stone-700">{t("noFilterResults", lang)}</p> : null}
       <ul className="space-y-3">
         {people.map((person) => (

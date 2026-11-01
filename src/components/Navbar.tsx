@@ -1,6 +1,6 @@
 "use client";
 
-// Sticky top bar and a phone bottom bar. Desktop links stay in the top bar.
+// Logo and search stay in the top bar. The five sections live in a bottom bar on every screen size.
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -38,7 +38,7 @@ export function Navbar() {
             <img src="/hela-connect-logo.jpg" alt="" className="h-9 w-9 rounded-lg bg-[#F5EDE3] object-cover" />
             <span className="hidden sm:inline">Hela-Connect</span>
           </Link>
-          <form onSubmit={search} className="min-w-0 flex-1 lg:max-w-md" role="search">
+          <form onSubmit={search} className="min-w-0 max-w-xl flex-1" role="search">
             <label className="sr-only" htmlFor="nav-search">
               {t("searchLabel", lang)}
             </label>
@@ -51,21 +51,16 @@ export function Navbar() {
               className="h-10 w-full rounded-full border border-stone-300 bg-[#f3f2ef] px-4 text-sm outline-none focus-visible:border-[#2F3A7A] focus-visible:ring-2 focus-visible:ring-[#2F3A7A]"
             />
           </form>
-          <nav className="hidden items-stretch gap-1 lg:flex" aria-label={t("home", lang)}>
-            {LINKS.map((link) => (
-              <NavLink key={link.href} {...link} pathname={pathname} label={t(link.labelKey, lang)} unread={link.icon === "bell" ? unread : 0} />
-            ))}
-          </nav>
         </div>
       </header>
       <nav
-        className="fixed inset-x-0 bottom-0 z-40 border-t border-stone-200 bg-white pb-[env(safe-area-inset-bottom)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-stone-200 bg-white pb-[env(safe-area-inset-bottom)]"
         aria-label={t("home", lang)}
       >
-        <ul className="mx-auto grid max-w-lg grid-cols-5">
+        <ul className="grid grid-cols-5">
           {LINKS.map((link) => (
             <li key={link.href}>
-              <NavLink {...link} pathname={pathname} label={t(link.labelKey, lang)} unread={link.icon === "bell" ? unread : 0} compact />
+              <NavLink {...link} pathname={pathname} label={t(link.labelKey, lang)} unread={link.icon === "bell" ? unread : 0} />
             </li>
           ))}
         </ul>
@@ -80,29 +75,26 @@ function NavLink({
   label,
   icon,
   unread,
-  compact,
 }: {
   href: string;
   pathname: string;
   label: string;
   icon: (typeof LINKS)[number]["icon"];
   unread: number;
-  compact?: boolean;
 }) {
   const active = pathname === href;
   return (
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={`relative flex flex-col items-center justify-center gap-0.5 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F3A7A] ${
-        compact ? "min-h-14 px-1" : "min-w-16 px-2 py-1"
-      } ${active ? "text-[#2F3A7A]" : "text-stone-500"}`}
+      className={`relative flex min-h-[4.25rem] flex-col items-center justify-center gap-1 no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2F3A7A] ${
+        active ? "text-[#2F3A7A]" : "text-stone-400"
+      }`}
     >
       <Icon name={icon} active={active} />
-      <span className={`font-semibold leading-none ${compact ? "text-[11px]" : "text-xs"}`}>{label}</span>
-      {active ? <span className="absolute inset-x-3 top-0 hidden h-0.5 rounded-full bg-[#2F3A7A] lg:block" /> : null}
+      <span className="text-[13px] font-semibold leading-none">{label}</span>
       {unread > 0 ? (
-        <span className="absolute right-2 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-[#b42318] px-1 text-[10px] font-bold text-white">
+        <span className="absolute right-[28%] top-2 grid h-4 min-w-4 place-items-center rounded-full bg-[#b42318] px-1 text-[10px] font-bold text-white">
           {unread}
         </span>
       ) : null}
@@ -111,7 +103,7 @@ function NavLink({
 }
 
 function Icon({ name, active }: { name: (typeof LINKS)[number]["icon"]; active: boolean }) {
-  const common = "h-6 w-6";
+  const common = "h-7 w-7";
   const fill = active ? "currentColor" : "none";
   if (name === "home") {
     return (
