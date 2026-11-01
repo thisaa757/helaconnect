@@ -78,16 +78,6 @@ export async function saveProfile(patch: Partial<ProfileFormValues>): Promise<{ 
   return { ok: true };
 }
 
-export async function saveRating(rateeId: string, stars: number, comment: string): Promise<{ ok: true } | { ok: false; error: ApiFailure; fields?: { stars?: "stars"; comment?: "commentLength" } }> {
-  const result = await send("/api/ratings", "POST", { rateeId, stars, comment });
-  if (typeof result === "string" || result.status >= 400) {
-    const data = typeof result === "string" ? null : result.data;
-    const fields = data && typeof data === "object" ? (data as { fields?: { stars?: "stars"; comment?: "commentLength" } }).fields : undefined;
-    return { ok: false, error: failureFrom(result), fields };
-  }
-  return { ok: true };
-}
-
 export async function improveDescription(text: string, language: string): Promise<{ ok: true; suggestion: string; mocked: boolean } | { ok: false; error: ApiFailure }> {
   const result = await send("/api/improve-description", "POST", { text, language });
   if (typeof result === "string" || result.status >= 400) return { ok: false, error: failureFrom(result) };
